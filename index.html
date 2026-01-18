@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RN Energy - Live Simulation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #050a18;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #00d4ff;
+            color: #000;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tank-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tank-card {
+            background: #0f172a;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #1e293b;
+            width: 150px;
+        }
+
+        /* ടാങ്ക് ഡിസൈൻ */
+        .tank {
+            width: 100px;
+            height: 200px;
+            border: 3px solid #fff;
+            border-radius: 5px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .water {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to top, #2563eb, #3b82f6);
+            transition: height 0.5s ease-in-out;
+        }
+
+        .label {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .percent-text {
+            font-size: 20px;
+            color: #4ade80;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h2>RN Energy Simulation</h2>
+    </div>
+
+    <div class="tank-wrapper">
+        <div class="tank-card">
+            <div id="borwell-percent" class="percent-text">0%</div>
+            <div class="tank">
+                <div id="borwell-water" class="water" style="height: 0%;"></div>
+            </div>
+            <div class="label">BORWELL TANK</div>
+        </div>
+
+        <div class="tank-card">
+            <div id="filter-percent" class="percent-text">0%</div>
+            <div class="tank">
+                <div id="filter-water" class="water" style="height: 0%;"></div>
+            </div>
+            <div class="label">FILTER TANK</div>
+        </div>
+    </div>
+
+    <script>
+        // സിമുലേഷൻ ഫംഗ്ഷൻ
+        function simulateWaterLevel() {
+            // 0 മുതൽ 100 വരെയുള്ള റാൻഡം സംഖ്യകൾ എടുക്കുന്നു
+            let borwellLevel = Math.floor(Math.random() * 101);
+            let filterLevel = Math.floor(Math.random() * 101);
+
+            // Borwell Tank അപ്ഡേറ്റ് ചെയ്യുന്നു
+            document.getElementById('borwell-water').style.height = borwellLevel + '%';
+            document.getElementById('borwell-percent').innerText = borwellLevel + '%';
+
+            // Filter Tank അപ്ഡേറ്റ് ചെയ്യുന്നു
+            document.getElementById('filter-water').style.height = filterLevel + '%';
+            document.getElementById('filter-percent').innerText = filterLevel + '%';
+        }
+
+        // ഓരോ 2 സെക്കൻഡിലും ജലനിരപ്പ് മാറ്റുന്നു
+        setInterval(simulateWaterLevel, 2000);
+
+        // പേജ് ലോഡ് ചെയ്യുമ്പോൾ ആദ്യം പ്രവർത്തിക്കാൻ
+        simulateWaterLevel();
+    </script>
+
+</body>
+</html>
